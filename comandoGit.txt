@@ -1,0 +1,2 @@
+ver repositorios remotos asociados al local: git remote -ver
+remover referencia del repositorio remoto en el local: git remote remove "nombre-repo"

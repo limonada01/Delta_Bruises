@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Carga de Imágenes</title>
+</head>
+<body>
+    <h1>Prueba de Carga de Imágenes</h1>
+    
+    <form id="formularioImagen">
+        <label for="imagen">Selecciona una imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept=".jpg, .jpeg">
+        <button type="button" onclick="cargarImagen()">Cargar Imagen</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function cargarImagen() {
+            var inputImagen = document.getElementById('imagen');
+            var archivo = inputImagen.files[0];
+
+            if (!archivo) {
+                alert('Selecciona una imagen antes de cargar');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('imagen', archivo);
+
+            fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resp = data;
+                document.getElementById('resultado').innerText = `${resp}`|| 'Error desconocido';
+                console.log(resp)
+            })
+            .catch(error => {
+                console.error('Error al cargar la imagen:', error);
+                document.getElementById('resultado').innerText = 'Error al cargar la imagen';
+            });
+        }
+    </script>
+</body>
+</html>

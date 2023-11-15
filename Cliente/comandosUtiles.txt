@@ -1,0 +1,2 @@
+crear proyecto react: npx create-react-app nombre_app
+para ejecutar proyecto react (en carpeta del proyecto): npm run start
